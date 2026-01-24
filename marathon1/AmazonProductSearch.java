@@ -10,11 +10,6 @@ import org.openqa.selenium.support.ui.Select;
 public class AmazonProductSearch {
 
 	public static void main(String[] args) throws InterruptedException {
-		
-		/*
-		 *    10. Capture and print the page
-		 * title 11. Close the browser
-		 */
 		//1. Launch the browser
 		ChromeDriver driver=new ChromeDriver();
 		driver.manage().window().maximize();
@@ -34,16 +29,19 @@ public class AmazonProductSearch {
 		driver.findElement(By.xpath("//span[text()='Gear']//preceding-sibling::div//i")).click();
 		Thread.sleep(3000);
 		//8. Apply sorting by selecting "New Arrivals"
-		//driver.findElement(By.xpath("//i[@class='a-icon a-icon-dropdown']")).click();
 		WebElement sortDropDown = driver.findElement(By.id("s-result-sort-select"));
 		Select dropdown=new Select(sortDropDown);
 		dropdown.selectByVisibleText("Newest Arrivals");
 		//9. Capture and print the first product details (name and discounted price)
 		String name=driver.findElement(By.xpath("//div[contains(@class,'a-row a-size-base a-color-secondary')]//following-sibling::a")).getText();
 		System.out.println("Name of the product is ");
-		System.out.println(name); 
+		System.out.println(name);
 		String price = driver.findElement(By.xpath("//span[@class='a-price-whole']")).getText();
 		System.out.println("Discounted price of the product is "+price);
+		//10. Capture and print the page title 
+		String title = driver.getTitle();
+		System.out.println("Page Title "+title);
+		//11. Close the browser
 		driver.quit();
 	}
 
